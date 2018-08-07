@@ -9,10 +9,24 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-md-2">Find product by name:</label>
+        <div class="col-md-10 form-inline">
+            @Html.TextBox("SearchString", null, new { @class = "form-control" })
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.ActionLink("Product Name", "Index", new { sortOrder = ViewBag.NameSortParam })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UPC)
