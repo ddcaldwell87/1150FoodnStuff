@@ -55,6 +55,10 @@ namespace FoodnStuff.WebMVC.Controllers
             if (ModelState.IsValid)
             {
                 db.Transactions.Add(transaction);
+
+                // get product from transaction, then decrement product quantity by 1.
+                db.Products.Find(transaction.ProductID).Quantity--;
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

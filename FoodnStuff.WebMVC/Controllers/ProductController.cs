@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FoodnStuff.WebMVC.Models;
+using PagedList;
 
 namespace FoodnStuff.WebMVC.Controllers
 {
@@ -18,7 +19,10 @@ namespace FoodnStuff.WebMVC.Controllers
         // GET: Product
         public ActionResult Index(string sortOrder, string searchString)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            ViewBag.CurrentFilter = searchString;
 
             var products = from p in db.Products
                            select p;
@@ -37,7 +41,6 @@ namespace FoodnStuff.WebMVC.Controllers
                     products = products.OrderBy(p => p.ProductName);
                     break;
             }
-
             return View(products.ToList());
         }
 

@@ -1,22 +1,23 @@
 ﻿@model IEnumerable<FoodnStuff.WebMVC.Models.Product>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Products";
 }
 
-<h2>Index</h2>
+<h2>Products</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
 {
 <div class="form-horizontal">
     <div class="form-group">
         <label class="control-label col-md-2">Find product by name:</label>
         <div class="col-md-10 form-inline">
-            @Html.TextBox("SearchString", null, new { @class = "form-control" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
             <input type="submit" value="Search" class="btn btn-default" />
         </div>
     </div>
